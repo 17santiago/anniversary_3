@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Para Mi Amor 💖</title>
+    
+</head>
+<body>
+    <!-- Fondo con corazones -->
+    <div class="hearts" id="hearts"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <header>
+            <h1>Para Mi Amorcito lindo 💗💗</h1>
+            <p class="subtitle">Cada momento contigo es especial</p>
+        </header>
+
+        <div class="photo-album" id="photoAlbum">
+            <!-- Las fotos se agregarán aquí con JavaScript -->
+        </div>
+
+        <div class="love-message">
+            <h2>Mensajito Para Ti</h2>
+            <p id="loveText">Eres la persona más especial en mi vida. 
+                Cada día a tu lado es un regalo y cada momento contigo queda grabado en mi corazón. 
+                Te amo demasiado enserio lamento lo poco de este aniversario pero agradezco estar a tu lado. ESTA ES LA WEB Y PERO LA APP ESTA MEJOR 💗</p>
+        </div>
+
+        <div class="music-player">
+            <h3 style="padding-bottom: 8px;">Canciones que me acuerdan a ti:</h3>
+            
+            <audio id="loveSong" controls>
+                <source src="/assets/song/song_1.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+            <audio id="loveSong" controls>
+                <source src="/assets/song/song_2.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+            <audio id="loveSong" controls>
+                <source src="/assets/song/song_3.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+            <audio id="loveSong" controls>
+                <source src="/assets/song/song_4.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+            <audio id="loveSong" controls>
+                <source src="/assets/song/song_5.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+            <p>🎵 Estas canciones me acuerdan mucho a tiii 🎵</p>
+        </div>
+
+
+        
+         <div class="video-grid">
+            <!-- Video 1 -->
+            <div class="video-container">
+                <div class="video-title">💗💗💗💗</div>
+                <video controls>
+                    <source src="/assets/videos/1.mp4" type="video/mp4">
+                    
+                </video>
+            </div>
+            
+            <!-- Video 2 -->
+            <div class="video-container">
+                <div class="video-title">💗💗💗💗</div>
+                <video controls>
+                    <source src="/assets/videos/2.mp4" type="video/mp4">
+                    
+                </video>
+            </div>
+            
+            <!-- Video 3 -->
+            <div class="video-container">
+                <div class="video-title">💗💗💗💗</div>
+                <video controls>
+                    <source src="/assets/videos/3.mp4" type="video/mp4">
+                    
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para ver fotos -->
+    <div class="modal" id="imageModal">
+        <span class="close" id="closeModal">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+
+
+
+    
+
+    <script>
+        // Array de fotos - REEMPLAZA ESTOS LINKS CON TUS FOTOS
+        const photos = [
+            {
+                url: "/assets/aniversario_1.jpg",
+                caption: "PRIMER ANIVERSARIO:"
+            },
+            {
+                url: "/assets/aniversario_2.jpg",
+                caption: "SEGUNDO ANIVERSARIO:"
+            },
+            {
+                url: "/assets/aniversario_3.jpg",
+                caption: "TECER ANIVERSARIO:"
+            },
+            
+        ];
+
+        // Función para crear corazones flotantes
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            for (let i = 0; i < 200; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '💗';
+                heart.style.left = Math.random() * 200 + 'vw';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heart.style.fontSize = (Math.random() * 40 + 20) + 'px';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        // Función para crear partículas
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.width = (Math.random() * 10 + 2) + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Función para cargar las fotos
+        function loadPhotos() {
+            const album = document.getElementById('photoAlbum');
+            photos.forEach((photo, index) => {
+                const photoItem = document.createElement('div');
+                photoItem.className = 'photo-item';
+                photoItem.innerHTML = `
+                    <div class="photo-caption">
+                        <p>${photo.caption}</p>
+                    </div> 
+                    <img src="${photo.url}" alt="Foto ${index + 1}" loading="lazy">
+                    
+                `;
+                
+                // Agregar evento para abrir imagen en modal
+                photoItem.addEventListener('click', () => {
+                    const modal = document.getElementById('imageModal');
+                    const modalImg = document.getElementById('modalImage');
+                    modal.style.display = 'flex';
+                    modalImg.src = photo.url;
+                });
+
+                album.appendChild(photoItem);
+            });
+        }
+
+        // Cerrar modal
+        document.getElementById('closeModal').addEventListener('click', () => {
+            document.getElementById('imageModal').style.display = 'none';
+        });
+
+        // Cerrar modal al hacer click fuera de la imagen
+        document.getElementById('imageModal').addEventListener('click', (e) => {
+            if (e.target.id === 'imageModal') {
+                document.getElementById('imageModal').style.display = 'none';
+            }
+        });
+
+        // INSTRUCCIONES PARA TI:
+        // 1. Reemplaza las URLs de las fotos en el array 'photos' con tus propias fotos
+        // 2. Cambia los textos de las caption por mensajes personales
+        // 3. Para la música: reemplaza el src del audio con un archivo MP3 de tu canción especial
+        // 4. Puedes cambiar el mensaje de amor en el elemento con id 'loveText'
+
+        // Inicializar todo cuando cargue la página
+        window.addEventListener('load', () => {
+            createHearts();
+            createParticles();
+            loadPhotos();
+        });
+    </script>
+</body>
+</html>
